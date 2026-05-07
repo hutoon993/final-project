@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Hutoon Mohammed | CS Student Portfolio - Video & Animation</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', 'Arial', sans-serif;
+            line-height: 1.6;
+            background: #f8fafc;
+            color: #0f172a;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem 3rem 2rem;
+            background: white;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
+            border-radius: 0 0 28px 28px;
+        }
+
+        /* ========= ANIMATED SVG LOGO ========= */
+        .animated-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-right: 12px;
+            animation: floatLogo 5s ease-in-out infinite;
+        }
+
+        .logo-svg {
+            width: 48px;
+            height: 48px;
+            filter: drop-shadow(0 2px 6px rgba(59,130,246,0.3));
+            animation: subtleGlow 3s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0f2b3d, #1e4a76, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        @keyframes subtleGlow {
+            0% { filter: drop-shadow(0 0 0px rgba(59,130,246,0)); }
+            50% { filter: drop-shadow(0 0 12px rgba(59,130,246,0.6)); }
+            100% { filter: drop-shadow(0 0 0px rgba(59,130,246,0)); }
+        }
+
+        @keyframes floatLogo {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .animated-logo:hover .logo-svg {
+            animation: pulseRotate 0.6s ease-in-out;
+        }
+
+        @keyframes pulseRotate {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        /* ========= CAROUSEL ========= */
+        .carousel-section {
+            margin-bottom: 2rem;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 18px 30px -12px rgba(0, 0, 0, 0.2);
+            background: #0f172a;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 28px;
+        }
+
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            position: relative;
+            height: 460px;
+            background: #1e293b;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.75) contrast(1.05);
+            transition: transform 0.4s ease;
+        }
+
+        .slide:hover img {
+            transform: scale(1.02);
+        }
+
+        .slide-overlay {
+            position: absolute;
+            bottom: 12%;
+            left: 5%;
+            right: 5%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 80%, transparent 100%);
+            backdrop-filter: blur(3px);
+            padding: 1.2rem 2rem;
+            border-radius: 60px;
+            max-width: 75%;
+            color: white;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            border-left: 6px solid #3b82f6;
+        }
+
+        .slide-overlay h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .slide-overlay p {
+            font-size: 1rem;
+            opacity: 0.92;
+            color: wheat;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            color: white;
+            border: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 60px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 15;
+            opacity: 0.8;
+        }
+
+        .carousel-btn:hover {
+            background: #3b82f6;
+            opacity: 1;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .btn-prev { left: 20px; }
+        .btn-next { right: 20px; }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            z-index: 15;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .dot.active {
+            background-color: #3b82f6;
+            transform: scale(1.2);
+            width: 28px;
+            border-radius: 20px;
+            box-shadow: 0 0 6px white;
+        }
+
+        .narration-bar {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 20;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .narration-label {
+            font-size: 0.8rem;
+            color: #cbd5e1;
+        }
+
+        .audio-btn {
+            background: #3b82f6;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .audio-btn:hover { background: #2563eb; transform: scale(1.05); }
+        .audio-btn.muted { background: #475569; opacity: 0.8; }
+        .slide-audio-status { font-size: 0.75rem; color: #cbd5e1; font-family: monospace; }
+
+        /* ========= VIDEO SECTION ========= */
+        .video-showcase {
+            margin: 2.5rem 0 2rem 0;
+            background: linear-gradient(145deg, #f1f5f9, #ffffff);
+            border-radius: 32px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 12px 28px -10px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .video-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-header span { font-size: 2rem; }
+
+        .video-header h3 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: #0c4a6e;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 28px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 18px 28px -12px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .video-wrapper:hover { transform: scale(1.01); }
+
+        .video-wrapper iframe {
+            width: 100%;
+            display: block;
+            border-radius: 28px;
+            aspect-ratio: 16 / 9;
+        }
+
+        .video-caption {
+            text-align: center;
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+            color: #334155;
+            background: #eef2ff;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        /* ========= CONTACT FORM ========= */
+        .creative-form-section {
+            background: radial-gradient(circle at 10% 30%, #ffffff, #fef9e6);
+            border-radius: 44px;
+            margin: 2.2rem 0 2rem;
+            padding: 2rem 2rem 2.5rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.12);
+            border: 1px solid rgba(59,130,246,0.25);
+        }
+
+        .form-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 2rem;
+        }
+
+        .form-header span { font-size: 2.6rem; }
+
+        .form-header h3 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            background: linear-gradient(120deg, #0c4a6e, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            position: relative;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 0.9rem 1.2rem;
+            border-radius: 60px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+        }
+
+        .form-group input.invalid,
+        .form-group select.invalid {
+            border-color: #e11d48;
+            box-shadow: 0 0 0 3px rgba(225,29,72,0.12);
+        }
+
+        .form-group input.valid,
+        .form-group select.valid {
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34,197,94,0.1);
+        }
+
+        .error-msg {
+            font-size: 0.8rem;
+            color: #e11d48;
+            min-height: 18px;
+            margin-left: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+        }
+
+        .checkbox-group {
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group .checkbox-label-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #3b82f6;
+            cursor: pointer;
+            border-radius: 4px;
+            padding: 0;
+            border: none;
+            box-shadow: none;
+        }
+
+        .checkbox-group .checkbox-text {
+            font-weight: 500;
+            color: #1e293b;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .submit-button {
+            background: linear-gradient(95deg, #1e4a76, #3b82f6);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 8px 18px rgba(59,130,246,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: fit-content;
+            min-width: 200px;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(95deg, #2563eb, #1e3a8a);
+            box-shadow: 0 12px 22px rgba(0,0,0,0.15);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-success {
+            background: #dcfce7;
+            border-left: 7px solid #22c55e;
+            padding: 1rem 1.5rem;
+            border-radius: 28px;
+            margin-top: 0.5rem;
+            font-weight: 500;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            color: #166534;
+        }
+
+        .form-success.show { display: flex; }
+
+        /* ========= TYPOGRAPHY & NAV ========= */
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 0.5rem 0 1rem 0;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 1rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+            margin: 0.75rem 0 1rem 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #1e40af;
+            transition: 0.2s;
+            font-size: 1.05rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover { color: #2563eb; border-bottom-color: #3b82f6; }
+
+        h2 {
+            font-size: 1.9rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: #0c4a6e;
+            border-left: 6px solid #3b82f6;
+            padding-left: 1rem;
+        }
+
+        p { margin-bottom: 1.2rem; font-size: 1.05rem; color: #1e293b; }
+        a { color: #2563eb; text-decoration: none; font-weight: 500; }
+        a:hover { text-decoration: underline; }
+
+        .certificates-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+            align-items: center;
+        }
+
+        .certificates-grid img {
+            width: 260px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 12px 25px -10px rgba(0,0,0,0.2);
+            transition: 0.25s ease;
+            border: 2px solid #e2e8f0;
+        }
+
+        .certificates-grid img:hover { transform: translateY(-6px); border-color: #3b82f6; }
+
+        hr { margin: 2rem 0 1rem; border: 0; height: 2px; background: linear-gradient(90deg, #cbd5e1, #94a3b8, #cbd5e1); }
+
+        footer { text-align: center; margin-top: 2rem; font-size: 0.85rem; color: #475569; }
+
+        @media (max-width: 760px) {
+            .container { padding: 1rem 1.2rem 2rem; }
+            .certificates-grid img { width: 100%; max-width: 220px; }
+            .logo-svg { width: 36px; height: 36px; }
+            .logo-text { font-size: 1.3rem; }
+            .form-row { flex-direction: column; gap: 1rem; }
+            .submit-button { width: 100%; justify-content: center; }
+            .slide { height: 320px; }
+            .slide-overlay { max-width: 90%; padding: 0.8rem 1.2rem; }
+            .slide-overlay h3 { font-size: 1.2rem; }
+            .narration-bar { padding: 0.3rem 0.7rem; gap: 6px; }
+            .audio-btn { width: 28px; height: 28px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ANIMATED SVG LOGO / HEADER -->
+    <div class="portfolio-header">
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <div class="animated-logo">
+                <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L3 7L12 12L21 7L12 2Z" stroke="url(#gradient)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="url(#shieldGrad)"/>
+                    <path d="M12 12V22" stroke="url(#gradient)" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M12 12L21 7" stroke="url(#gradient)" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M12 12L3 7" stroke="url(#gradient)" stroke-width="1.5" stroke-linecap="round"/>
+                    <rect x="8" y="10" width="8" height="6" rx="1" stroke="#3b82f6" stroke-width="1.2" fill="none"/>
+                    <circle cx="12" cy="13" r="1.5" fill="#3b82f6"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#3b82f6"/>
+                            <stop offset="1" stop-color="#1e4a76"/>
+                        </linearGradient>
+                        <linearGradient id="shieldGrad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#1e3a5f" stop-opacity="0.3"/>
+                            <stop offset="1" stop-color="#3b82f6" stop-opacity="0.15"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="logo-text">Hutoon Mohammed - CS Portfolio</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CAROUSEL SECTION -->
+    <div class="carousel-section">
+        <div class="carousel-container">
+            <div class="carousel-slides" id="carouselSlides">
+                <div class="slide">
+                    <img src="who am i2.jpg" alt="Who I am">
+                    <div class="slide-overlay"><h3>Who I Am</h3><p>Computer Science student | Passionate about Cybersecurity & Networking</p></div>
+                </div>
+                <div class="slide">
+                    <img src="skills.jpeg" alt="Skills">
+                    <div class="slide-overlay"><h3>My Skills</h3><p>Python · Cisco Packet Tracer · DB Design · Web Dev · Problem Solving</p></div>
+                </div>
+                <div class="slide">
+                    <img src="stairs.jpeg" alt="Goals">
+                    <div class="slide-overlay"><h3>My Goals</h3><p>Internships in Network Security · Master System Architecture</p></div>
+                </div>
+                <div class="slide">
+                    <img src="community.jpeg" alt="Community">
+                    <div class="slide-overlay"><h3>Community & Growth</h3><p>Team Projects · Hackathons · Lifelong learning mindset</p></div>
+                </div>
+                <div class="slide">
+                    <img src="future impact1.jpeg" alt="Future">
+                    <div class="slide-overlay"><h3>Future Impact</h3><p>Building resilient systems · Cybersecurity advocate</p></div>
+                </div>
+            </div>
+            <button class="carousel-btn btn-prev" id="prevBtn">&#8249;</button>
+            <button class="carousel-btn btn-next" id="nextBtn">&#8250;</button>
+            <div class="carousel-dots" id="dotsContainer"></div>
+            <div class="narration-bar">
+                <span class="narration-label">🎧 Narration</span>
+                <button id="playNarrationBtn" class="audio-btn">▶</button>
+                <button id="pauseNarrationBtn" class="audio-btn muted">⏸</button>
+                <span id="audioStatus" class="slide-audio-status">⚪ Ready</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#video">Coding in Action</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills & Goals</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#connect">Connect</a>
+    </nav>
+
+    <!-- ABOUT -->
+    <h2 id="about">About Me</h2>
+    <p>I am a computer science student currently studying at <strong>The American University in the Emirates</strong> in Dubai with a strong interest in Cybersecurity, software development, and networking technologies.
+        <a href="https://www.linkedin.com/in/hutoon-salih" target="_blank">LinkedIn Profile</a>
+    </p>
+
+    <!-- PROJECTS -->
+    <h2 id="projects">My Projects</h2>
+    <p>Throughout my studies, I have worked on several technical projects that demonstrate my skills and understanding.
+        <a href="https://github.com/hutoon993" target="_blank">GitHub</a>.
+    </p>
+
+    <!-- VIDEO SECTION -->
+    <div id="video" class="video-showcase">
+        <div class="video-header"><span>🎥</span><h3>Coding in Action</h3></div>
+        <div class="video-wrapper">
+            <iframe id="portfolioVideo" width="100%" height="400" src="https://www.youtube.com/embed/w-XVtBXzgZ4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="video-caption">⚡ "Securing the future with resilient systems & ethical coding practices"</div>
+    </div>
+
+    <!-- CONTACT FORM -->
+    <div id="connect" class="creative-form-section">
+        <div class="form-header">
+            <span>📬✨</span>
+            <h3>Let's Connect & Collaborate</h3>
+        </div>
+
+        <form id="creativeContactForm" class="contact-form" novalidate>
+
+            <div class="form-row">
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="fullName">👤 Full Name *</label>
+                    <input type="text" id="fullName" placeholder="Hutoon Mohammed" autocomplete="name">
+                    <div class="error-msg" id="nameError"></div>
+                </div>
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">📧 Email Address *</label>
+                    <input type="email" id="email" placeholder="hello@example.com" autocomplete="email">
+                    <div class="error-msg" id="emailError"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <!-- Dropdown -->
+                <div class="form-group">
+                    <label for="projectInterest">💡 Project Interest *</label>
+                    <select id="projectInterest">
+                        <option value="">-- Select an option --</option>
+                        <option value="cybersecurity">Cybersecurity / Networking</option>
+                        <option value="webdev">Web Development / Portfolio</option>
+                        <option value="database">Database & Backend</option>
+                        <option value="internship">Internship / Career Opportunity</option>
+                    </select>
+                    <div class="error-msg" id="interestError"></div>
+                </div>
+                <!-- Age -->
+                <div class="form-group">
+                    <label for="age">🎂 Age (18–99) *</label>
+                    <input type="number" id="age" placeholder="Your age" min="18" max="99" step="1">
+                    <div class="error-msg" id="ageError"></div>
+                </div>
+            </div>
+
+            <!-- Terms Checkbox -->
+            <div class="form-group checkbox-group">
+                <div class="checkbox-label-row">
+                    <input type="checkbox" id="termsCheckbox">
+                    <label for="termsCheckbox" class="checkbox-text">I agree to the portfolio inquiry terms *</label>
+                </div>
+                <div class="error-msg" id="termsError"></div>
+            </div>
+
+            <button type="submit" class="submit-button" id="submitBtn">
+                <span>🚀</span> Send Inquiry
+            </button>
+
+            <div id="formSuccessMessage" class="form-success">
+                <span>✅</span>
+                <span>Thanks for reaching out! I'll get back to you soon.</span>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- SKILLS -->
+    <h2 id="skills">Skills & Career Goals</h2>
+    <p>My current skills include basic programming (Python, C), networking fundamentals, and more.
+        <a href="https://www.netacad.com" target="_blank">Cisco Networking Academy</a>.
+    </p>
+
+    <!-- CERTIFICATES -->
+    <h2 id="certificates">Certificates & Achievements</h2>
+    <div class="certificates-grid">
+        <img src="cisco certificate.jpg" alt="Cisco Certification">
+        <img src="honors certificate.jpg" alt="Honors Certificate">
+    </div>
+    <p style="margin-top: 0.8rem; font-style: italic;">✨ Recognitions in networking, academic honors, and cybersecurity foundations.</p>
+
+    <hr />
+    <footer>&copy; 2025 Hutoon Mohammed — CS Portfolio | The American University in the Emirates, Dubai</footer>
+
+</div><!-- /container -->
+
+<script>
+(function () {
+
+    /* ============================================================
+       CAROUSEL
+    ============================================================ */
+    const slidesContainer = document.getElementById('carouselSlides');
+    const slides           = document.querySelectorAll('.slide');
+    const prevButton       = document.getElementById('prevBtn');
+    const nextButton       = document.getElementById('nextBtn');
+    const dotsContainer    = document.getElementById('dotsContainer');
+    let currentIndex       = 0;
+    const totalSlides      = slides.length;
+    let autoPlayInterval;
+    const AUTO_PLAY_DELAY  = 15000;
+
+    const narrationScripts = [
+        "Welcome to my portfolio. I am Hutoon Mohammed, a computer science student passionate about cybersecurity and networking.",
+        "My technical skills include Python programming, Cisco Packet Tracer, database design, web development, and creative problem solving.",
+        "My career goals are focused on securing internships in network security, mastering system architecture, and driving safe innovation.",
+        "I believe in community and growth through team projects, hackathons, and a lifelong learning mindset.",
+        "My future impact involves building resilient digital systems and becoming a cybersecurity advocate."
+    ];
+
+    let isNarrating        = false;
+    const synthesisSupported = 'speechSynthesis' in window;
+
+    function stopCurrentNarration() {
+        if (synthesisSupported && window.speechSynthesis) window.speechSynthesis.cancel();
+        isNarrating = false;
+        updateAudioStatusIcon(false);
+    }
+
+    function playNarrationForSlide(slideIndex) {
+        if (!synthesisSupported) return;
+        stopCurrentNarration();
+        const utterance  = new SpeechSynthesisUtterance(narrationScripts[slideIndex]);
+        utterance.lang   = 'en-US';
+        utterance.rate   = 0.95;
+        utterance.onstart = () => {
+            isNarrating = true;
+            updateAudioStatusIcon(true);
+            document.getElementById('audioStatus').textContent = "🔊 Speaking...";
+        };
+        utterance.onend = () => {
+            isNarrating = false;
+            updateAudioStatusIcon(false);
+            document.getElementById('audioStatus').textContent = "✅ Done";
+            setTimeout(() => {
+                if (document.getElementById('audioStatus') && !isNarrating)
+                    document.getElementById('audioStatus').textContent = "⚪ Ready";
+            }, 2000);
+        };
+        window.speechSynthesis.speak(utterance);
+        document.getElementById('audioStatus').textContent = "🎙️ Narrating...";
+    }
+
+    function pauseNarration() {
+        if (synthesisSupported && window.speechSynthesis && isNarrating) {
+            window.speechSynthesis.cancel();
+            isNarrating = false;
+            updateAudioStatusIcon(false);
+            document.getElementById('audioStatus').textContent = "⏸ Paused";
+        }
+    }
+
+    function updateAudioStatusIcon(isActive) {
+        const playBtn  = document.getElementById('playNarrationBtn');
+        const pauseBtn = document.getElementById('pauseNarrationBtn');
+        if (playBtn && pauseBtn) {
+            if (isActive) { playBtn.classList.add('muted');    pauseBtn.classList.remove('muted'); }
+            else          { playBtn.classList.remove('muted'); pauseBtn.classList.add('muted'); }
+        }
+    }
+
+    document.getElementById('playNarrationBtn') ?.addEventListener('click', () => {
+        stopCurrentNarration();
+        playNarrationForSlide(currentIndex);
+    });
+    document.getElementById('pauseNarrationBtn')?.addEventListener('click', pauseNarration);
+
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === currentIndex) dot.classList.add('active');
+            dot.addEventListener('click', () => { goToSlide(i); resetAutoPlay(); });
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function updateDots() {
+        document.querySelectorAll('.dot').forEach((dot, idx) => {
+            idx === currentIndex ? dot.classList.add('active') : dot.classList.remove('active');
+        });
+    }
+
+    function goToSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= totalSlides) index = totalSlides - 1;
+        currentIndex = index;
+        slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+        updateDots();
+    }
+
+    function nextSlide() { goToSlide((currentIndex + 1) % totalSlides); resetAutoPlay(); }
+    function prevSlide() { goToSlide((currentIndex - 1 + totalSlides) % totalSlides); resetAutoPlay(); }
+
+    function startAutoPlay() {
+        if (autoPlayInterval) clearInterval(autoPlayInterval);
+        autoPlayInterval = setInterval(() => nextSlide(), AUTO_PLAY_DELAY);
+    }
+
+    function resetAutoPlay() {
+        if (autoPlayInterval) { clearInterval(autoPlayInterval); startAutoPlay(); }
+    }
+
+    prevButton.addEventListener('click', () => { prevSlide(); resetAutoPlay(); });
+    nextButton.addEventListener('click', () => { nextSlide(); resetAutoPlay(); });
+
+    const carouselContainer = document.querySelector('.carousel-container');
+    carouselContainer.addEventListener('mouseenter', () => { if (autoPlayInterval) clearInterval(autoPlayInterval); });
+    carouselContainer.addEventListener('mouseleave', startAutoPlay);
+
+    createDots();
+    goToSlide(0);
+    startAutoPlay();
+
+    let touchStartX = 0;
+    carouselContainer.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
+    carouselContainer.addEventListener('touchend',   (e) => {
+        const endX = e.changedTouches[0].screenX;
+        if      (endX < touchStartX - 50) { nextSlide(); resetAutoPlay(); }
+        else if (endX > touchStartX + 50) { prevSlide(); resetAutoPlay(); }
+    });
+
+    window.addEventListener('beforeunload', () => {
+        if (synthesisSupported && window.speechSynthesis) window.speechSynthesis.cancel();
+    });
+
+
+    /* ============================================================
+       FORM VALIDATION
+    ============================================================ */
+    const form           = document.getElementById('creativeContactForm');
+    const nameInput      = document.getElementById('fullName');
+    const emailInput     = document.getElementById('email');
+    const projectSelect  = document.getElementById('projectInterest');
+    const ageInput       = document.getElementById('age');
+    const termsCheck     = document.getElementById('termsCheckbox');
+
+    const nameError      = document.getElementById('nameError');
+    const emailError     = document.getElementById('emailError');
+    const interestError  = document.getElementById('interestError');
+    const ageError       = document.getElementById('ageError');
+    const termsError     = document.getElementById('termsError');
+    const successDiv     = document.getElementById('formSuccessMessage');
+
+    const errorIcon = '⚠️ ';
+
+    /* -- helpers -- */
+    function setError(errorEl, inputEl, message) {
+        errorEl.textContent = message ? errorIcon + message : '';
+        if (inputEl) {
+            inputEl.classList.toggle('invalid', !!message);
+            inputEl.classList.toggle('valid',   !message && inputEl.value !== '');
+        }
+    }
+
+    function clearError(errorEl, inputEl) {
+        setError(errorEl, inputEl, '');
+    }
+
+    /* -- individual validators -- */
+    function validateName() {
+        const v = nameInput.value.trim();
+        if (!v)          { setError(nameError, nameInput, 'Full name is required.'); return false; }
+        if (v.length < 2){ setError(nameError, nameInput, 'Name must be at least 2 characters.'); return false; }
+        clearError(nameError, nameInput);
+        return true;
+    }
+
+    function validateEmail() {
+        const v = emailInput.value.trim();
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!v)                      { setError(emailError, emailInput, 'Email address is required.'); return false; }
+        if (!emailPattern.test(v))   { setError(emailError, emailInput, 'Please enter a valid email address (e.g. name@example.com).'); return false; }
+        clearError(emailError, emailInput);
+        return true;
+    }
+
+    function validateInterest() {
+        if (!projectSelect.value) { setError(interestError, projectSelect, 'Please select a project interest.'); return false; }
+        clearError(interestError, projectSelect);
+        return true;
+    }
+
+    function validateAge() {
+        const v = ageInput.value.trim();
+        if (!v) { setError(ageError, ageInput, 'Age is required.'); return false; }
+        const n = Number(v);
+        if (!Number.isInteger(n))  { setError(ageError, ageInput, 'Age must be a whole number.'); return false; }
+        if (n < 18)                { setError(ageError, ageInput, 'You must be at least 18 years old.'); return false; }
+        if (n > 99)                { setError(ageError, ageInput, 'Age must be 99 or below.'); return false; }
+        clearError(ageError, ageInput);
+        return true;
+    }
+
+    function validateTerms() {
+        if (!termsCheck.checked) {
+            termsError.textContent = errorIcon + 'You must agree to the inquiry terms to proceed.';
+            return false;
+        }
+        termsError.textContent = '';
+        return true;
+    }
+
+    /* -- live feedback on blur / change -- */
+    nameInput    .addEventListener('blur',   validateName);
+    emailInput   .addEventListener('blur',   validateEmail);
+    projectSelect.addEventListener('change', validateInterest);
+    ageInput     .addEventListener('blur',   validateAge);
+    termsCheck   .addEventListener('change', validateTerms);
+
+    /* -- submit -- */
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        /* Run all validators and collect results */
+        const results = [
+            validateName(),
+            validateEmail(),
+            validateInterest(),
+            validateAge(),
+            validateTerms()
+        ];
+
+        if (results.every(Boolean)) {
+            /* All valid — show success */
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            successDiv.classList.add('show');
+
+            /* Reset form */
+            form.reset();
+            [nameInput, emailInput, projectSelect, ageInput].forEach(el => {
+                el.classList.remove('valid', 'invalid');
+            });
+
+            /* Re-enable after 5 s */
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                successDiv.classList.remove('show');
+            }, 5000);
+        }
+    });
+
+})();
+</script>
+
+</body>
+</html>
